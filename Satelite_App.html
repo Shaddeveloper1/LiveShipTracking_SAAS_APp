@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Code Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      padding: 2rem;
+      animation: bgShift 12s ease infinite alternate;
+    }
+
+    @keyframes bgShift {
+      0% { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
+      50% { background: linear-gradient(135deg, #1a0a2e, #2d1b69, #1b1464); }
+      100% { background: linear-gradient(135deg, #0d0a1a, #3a2d7a, #1a1a3e); }
+    }
+
+    .container {
+      max-width: 650px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      background: linear-gradient(90deg, #f7971e, #ffd200, #f7971e);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    .joke-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .joke-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg at 50% 50%,
+        transparent 0deg,
+        rgba(255, 215, 0, 0.08) 60deg,
+        transparent 120deg,
+        rgba(0, 191, 255, 0.08) 180deg,
+        transparent 240deg,
+        rgba(255, 105, 180, 0.08) 300deg,
+        transparent 360deg
+      );
+      animation: spinGlow 8s linear infinite;
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 0;
+    }
+
+    .joke-card:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes spinGlow {
+      to { transform: rotate(360deg); }
+    }
+
+    .joke-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(255, 215, 0, 0.4);
+      box-shadow:
+        0 20px 60px rgba(255, 215, 0, 0.12),
+        0 0 40px rgba(255, 215, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .joke-card:nth-child(2):hover {
+      border-color: rgba(0, 191, 255, 0.5);
+      box-shadow:
+        0 20px 60px rgba(0, 191, 255, 0.15),
+        0 0 40px rgba(0, 191, 255, 0.08);
+    }
+
+    .joke-card:nth-child(3):hover {
+      border-color: rgba(255, 105, 180, 0.5);
+      box-shadow:
+        0 20px 60px rgba(255, 105, 180, 0.15),
+        0 0 40px rgba(255, 105, 180, 0.08);
+    }
+
+    .joke-card:nth-child(4):hover {
+      border-color: rgba(0, 255, 170, 0.5);
+      box-shadow:
+        0 20px 60px rgba(0, 255, 170, 0.15),
+        0 0 40px rgba(0, 255, 170, 0.08);
+    }
+
+    .joke-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .joke-text {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+    }
+
+    .joke-text strong {
+      color: #ffd700;
+      font-weight: 600;
+    }
+
+    .joke-card:nth-child(2) .joke-text strong {
+      color: #4dc9f6;
+    }
+
+    .joke-card:nth-child(3) .joke-text strong {
+      color: #ff69b4;
+    }
+
+    .joke-card:nth-child(4) .joke-text strong {
+      color: #00ffaa;
+    }
+
+    .emoji-badge {
+      display: inline-block;
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.3));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .joke-card:nth-child(2) .emoji-badge {
+      filter: drop-shadow(0 0 12px rgba(0, 191, 255, 0.3));
+    }
+
+    .joke-card:nth-child(3) .emoji-badge {
+      filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.3));
+    }
+
+    .joke-card:nth-child(4) .emoji-badge {
+      filter: drop-shadow(0 0 12px rgba(0, 255, 170, 0.3));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(255, 215, 0, 0.15);
+      color: #ffd700;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .joke-card:nth-child(2) .tag {
+      background: rgba(0, 191, 255, 0.15);
+      color: #4dc9f6;
+      border-color: rgba(0, 191, 255, 0.2);
+    }
+
+    .joke-card:nth-child(3) .tag {
+      background: rgba(255, 105, 180, 0.15);
+      color: #ff69b4;
+      border-color: rgba(255, 105, 180, 0.2);
+    }
+
+    .joke-card:nth-child(4) .tag {
+      background: rgba(0, 255, 170, 0.15);
+      color: #00ffaa;
+      border-color: rgba(0, 255, 170, 0.2);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    footer a {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>&#x1f648; No Code Found</h1>
+
+    <div class="joke-card">
+      <div class="emoji-badge">&#x1f648;</div>
+      <div class="joke-text">
+        <strong>&#x1f4a1; Me:</strong> "I'll just fix this one tiny bug real quick"<br>
+        <em>3 hours later... <strong>404: Sanity Not Found</strong></em>
+      </div>
+      <span class="tag">Junior Dev Life</span>
+    </div>
+
+    <div class="joke-card">
+      <div class="emoji-badge">&#x1f427;</div>
+      <div class="joke-text">
+        <strong>&#x1f4a1; When you push to prod on Friday</strong> and your phone starts ringing at 2 AM:<br>
+        <em>"It's not a bug, it's a weekend feature."</em>
+      </div>
+      <span class="tag">Friday Push</span>
+    </div>
+
+    <div class="joke-card">
+      <div class="emoji-badge">&#x1f4bb;</div>
+      <div class="joke-text">
+        <strong>&#x1f4a1; My code compiled first try.</strong><br>
+        <em>I think I need to re-evaluate my life choices. Something is terribly wrong.</em>
+      </div>
+      <span class="tag">Impossible</span>
+    </div>
+
+    <div class="joke-card">
+      <div class="emoji-badge">&#x1f4a9;</div>
+      <div class="joke-text">
+        <strong>&#x1f4a1; Real programmers</strong> don't comment their code.<br>
+        <em>If it was hard to write, it should be hard to understand.</em>
+      </div>
+      <span class="tag">Toxic Dev</span>
+    </div>
+
+    <footer>
+      made with &#x1fa77; by a dev who <em>definitely</em> wrote tests first
+    </footer>
+  </div>
+</body>
+</html>
